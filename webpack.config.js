@@ -1,4 +1,11 @@
 module.exports = {
-    mode: "development"
-
+    mode: "development",
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: ["babel-loader"]
+            }
+        ]
+    }
 }
