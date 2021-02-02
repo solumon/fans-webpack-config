@@ -1,3 +1,6 @@
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
+
 module.exports = {
     mode: "development",
     module: {
@@ -30,5 +33,8 @@ module.exports = {
                 use: ["file-loader"]
             }
         ]
-    }
+    },
+    plugins: [
+        new CleanWebpackPlugin()
+    ]
 }
