@@ -1,7 +1,9 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const path = require("path");
-const glob = require("glob")
+const glob = require("glob");
+const autoprefixer = require('autoprefixer');
 
 const setMPA = () => {
     const entry = {}
@@ -62,7 +64,7 @@ module.exports = {
                         loader: "postcss-loader",
                         options: {
                             plugins:() => {
-                                require("autoprefixer")({
+                                autoprefixer({
                                     browsers: ["last 2 version", ">1%", "iOS 8"]
                                 })
                             }
@@ -88,7 +90,8 @@ module.exports = {
         ]
     },
     plugins: [
+        new FriendlyErrorsWebpackPlugin(),
         new CleanWebpackPlugin(),
     ].concat(htmlWebpackPlugins),
-    devtool: "cheap-source-map"
+    stats: "errors-only"
 }
