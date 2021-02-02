@@ -15,7 +15,21 @@ module.exports = {
             },
             {
                 test: /\.less$/,
-                use: ["style-loader","css-loader","less-loader"]
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "less-loader",
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            plugins:() => {
+                                require("autoprefixer")({
+                                    browsers: ["last 2 version", ">1%", "iOS 8"]
+                                })
+                            }
+                        }
+                    }
+                ]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
