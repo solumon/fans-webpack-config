@@ -1,5 +1,5 @@
 {
-  "name": "webpack-config",
+  "name": "fans-webpack-config",
   "version": "1.0.0",
   "description": "webpack-config",
   "repository": {
@@ -15,7 +15,7 @@
     "webpack-config"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
