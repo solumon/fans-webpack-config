@@ -1,14 +1,45 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
+const glob = require("glob")
+
+const setMPA = () => {
+    const entry = {}
+    const htmlWebpackPlugins = []
+    const entryFiles = glob.sync(path.join(__dirname, "./src/mpa/*"))
+    entryFiles.map(file => {
+        const match = file.match(/src\/mpa\/(.*)\.js/)
+        const page = match && match[1]
+        entry[page] = file
+        htmlWebpackPlugins.push(new HtmlWebpackPlugin({
+            template: path.join(__dirname, `public/mpa/${page}.html`),
+            filename: `html/${page}.html`,
+            chunks: [page],
+            inject: true,
+            minify: {
+                html5: true,
+                collapseWhitespace: false,
+                preserveLineBreaks: false,
+                minifyCSS: false,
+                minifyJS: false,
+                removeComments: false
+            }
+        }))
+    })
+    return {
+        entry,
+        htmlWebpackPlugins
+    }
+}
+
+const {entry, htmlWebpackPlugins} = setMPA()
 
 module.exports = {
+    /* 打包模式 development  production none */
     mode: "development",
-    entry: {
-        app: "./src/index.js"
-    },
+    entry: entry,
     output: {
-        filename: "bundle.js",
+        filename: "js/[name].js",
         path: path.resolve(__dirname, 'dist')
     },
     module: {
@@ -58,9 +89,6 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: "public/index.html",
-            title: "webpack-config"
-        })
-    ]
+    ].concat(htmlWebpackPlugins),
+    devtool: "cheap-source-map"
 }

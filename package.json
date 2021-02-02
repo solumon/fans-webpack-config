@@ -10,7 +10,9 @@
   "scripts": {
     "build": "webpack"
   },
-  "keywords": ["webpack-config"],
+  "keywords": [
+    "webpack-config"
+  ],
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -21,6 +23,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
+    "glob": "^7.1.6",
     "html-webpack-plugin": "^4.5.1",
     "less": "^4.1.1",
     "less-loader": "^8.0.0",
